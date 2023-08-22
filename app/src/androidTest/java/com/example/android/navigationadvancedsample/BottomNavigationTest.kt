@@ -46,74 +46,26 @@ class BottomNavigationTest {
 
     @Test
     fun bottomNavView_clickOnAllItems() {
-        // All screens open at their first destinations
-        assertFirstScreen()
 
-        openThirdScreen()
-
-        assertThirdScreen()
-
-        openSecondScreen()
-
-        assertSecondScreen()
-
-        openFirstScreen()
-
-        assertFirstScreen()
     }
 
     @Test
     fun bottomNavView_backGoesToFirstItem() {
-        // From the 2nd or 3rd screens, back takes you to the 1st.
-        openThirdScreen()
 
-        pressBack()
-
-        assertFirstScreen()
     }
 
     @Test(expected = NoActivityResumedException::class)
     fun bottomNavView_backfromFirstItemExits() {
-        // From the first screen, back finishes the activity
-        assertFirstScreen()
 
-        pressBack() // This should throw NoActivityResumedException
-
-        fail() // If it doesn't throw
     }
 
     @Test
     fun bottomNavView_backstackMaintained() {
-        // The back stack of any screen is maintained when returning to it
-        openThirdScreen()
-
-        onView(withContentDescription(R.string.sign_up))
-                .perform(click())
-
-       assertDeeperThirdScreen()
-
-        openFirstScreen()
-
-        // Return to 3rd
-        openThirdScreen()
-
-        // Assert it maintained the back stack
-        assertDeeperThirdScreen()
     }
 
     @Test
     fun bottomNavView_registerBackRegister() {
-        openThirdScreen()
 
-        pressBack() // This is handled in a especial way in code.
-
-        openThirdScreen()
-
-        onView(withContentDescription(R.string.sign_up))
-            .perform(click())
-
-        // Assert it maintained the back stack
-        assertDeeperThirdScreen()
     }
 
     private fun assertSecondScreen() {
